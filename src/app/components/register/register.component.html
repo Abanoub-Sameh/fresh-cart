@@ -1,0 +1,57 @@
+<section class="w-75 mx-auto py-5">
+
+    <h2>Register Now :</h2>
+    <form [formGroup]="formRegister" (ngSubmit)="handelRegister(formRegister)">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control mb-3" id="name" formControlName="name">
+        
+        <div *ngIf="formRegister.get('name')?.errors && formRegister.get('name')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formRegister.get('name')?.getError('minlength')" class="m-0">Please enter a text with a minimum of 3 characters .</p>
+            <p *ngIf="formRegister.get('name')?.getError('maxlength')" class="m-0">Please enter a text with a maximum of 20 characters.</p>
+            <p *ngIf="formRegister.get('name')?.getError('required')" class="m-0">This field is required</p>
+        </div>
+        
+        <label for="email">Email:</label>
+        <input type="email" class="form-control mb-3" id="email" formControlName="email">
+        <div *ngIf="formRegister.get('email')?.errors && formRegister.get('email')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formRegister.get('email')?.getError('email')" class="m-0">Email is invalid</p>
+            <p *ngIf="formRegister.get('email')?.getError('required')" class="m-0">Email is required</p>
+        </div>
+        
+        <label for="password">Password:</label>
+        <input type="password" class="form-control mb-3" id="password" formControlName="password">
+
+        <div *ngIf="formRegister.get('password')?.errors && formRegister.get('password')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formRegister.get('password')?.getError('pattern')">Must contain a lowercase letter (a-z).</p>
+            <p *ngIf="formRegister.get('password')?.getError('pattern')">Must contain an uppercase letter (A-Z).</p>
+            <p *ngIf="formRegister.get('password')?.getError('pattern')" >Must contain a number (0-9).</p>
+            <p *ngIf="formRegister.get('password')?.getError('pattern')">Must contain a special character (@$!%*?&).</p>
+            <p *ngIf="formRegister.get('password')?.getError('required')">Must be at least 8 characters long.</p>
+        </div>
+        
+        <label for="rePassword">RePassword:</label>
+        <input type="password" class="form-control mb-3" id="rePassword" formControlName="rePassword">
+        
+        <div *ngIf="formRegister.get('rePassword')?.errors && formRegister.get('rePassword')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formRegister.get('rePassword')?.getError('passwordmatch')">repassword is not matched.</p>
+            <p *ngIf="formRegister.get('rePassword')?.getError('required')">Must be at least 8 characters long.</p>
+        </div>
+
+        <label for="phone">phone:</label>
+        <input type="tel" class="form-control mb-3" id="phone" formControlName="phone">
+
+        <div *ngIf="formRegister.get('phone')?.errors && formRegister.get('phone')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formRegister.get('phone')?.getError('pattern')">please enter egyption valid number.</p>
+            <p *ngIf="formRegister.get('phone')?.getError('required')">phone is required.</p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <p class="text-muted">"Do you have an account? <a routerLink="/login">Login.</a> </p>
+            <button [disabled]="formRegister.invalid" type="submit" class="btn bg-main text-white d-block ms-auto">
+                <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin"></i>
+                <span *ngIf="!isLoading">SignUp</span>
+            </button>
+        </div>
+        <div *ngIf="errorMsg"  class="w-50 text-center mx-auto my-2 alert alert-danger">{{errorMsg}}</div>
+    </form>
+</section>

@@ -1,0 +1,9 @@
+<div class="row g-5 my-5">
+    <div *ngFor="let brand of brands" class=" col-sm-6 col-lg-4 col-xl-3 product overflow-hidden d-flex justify-content-center align-items-center">
+        <a [routerLink]="['/brandDetails', brand._id ]">
+        <div>
+            <img class="img-fluid" [src]="brand.image" alt="brand image">
+        </div>
+        </a>
+    </div>
+</div>

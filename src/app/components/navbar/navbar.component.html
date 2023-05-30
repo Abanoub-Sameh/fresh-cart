@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg bg-main-light">
+    <div class="container">
+      <a class="navbar-brand" routerLink="home"><img src="./assets/freshcart-logo.svg" alt="fresh cart logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul *ngIf="isLogin" class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="brands">Brands</a>
+          </li>
+          <li class="nav-item d-flex justify-content-center">
+            <a class="nav-link position-relative" routerLinkActive="active"  routerLink="cart">
+              <span *ngIf="numberOFCart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{numberOFCart}}
+              </span>
+              <i class="fa-solid fa-cart-shopping fa-lg text-main"></i></a>
+          </li>
+
+        </ul>
+        <ul class="navbar-nav ms-auto rightSite align-items-center">
+          <li class="nav-item nav-link me-sm-3 icons">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </li>
+          <li *ngIf="!isLogin" class="nav-item">
+            <a class="nav-link mx-0" routerLink="login"><button class="btn btn-outline-dark">Login</button></a>
+          </li>
+          <li *ngIf="!isLogin" class="nav-item">
+            <a class="nav-link mx-0" routerLink="register"><button class="btn btn-outline-dark">SignUp</button></a>
+          </li>
+          <li *ngIf="isLogin" class="nav-item py-2">
+            <button  mat-button [matMenuTriggerFor]="animals"><i class="fa-solid fa-ellipsis-vertical fs-3"></i></button>
+            <mat-menu #animals="matMenu">
+              <button mat-menu-item [matMenuTriggerFor]="vertebrates">Setting</button>
+              <button mat-menu-item><a *ngIf="isLogin" class="nav-link mx-0" (click)="signout()"><button class="btn btn-outline-danger">Signout <i class="fa-solid fa-arrow-right-from-bracket"></i></button></a>
+            </button>
+            </mat-menu>
+            <mat-menu #vertebrates="matMenu">
+              <button class="justify-content-center" mat-menu-item><a routerLink="/setting/updatePassword">Update password <i class="fa-solid fa-key"></i></a></button>
+              <button class="justify-content-center" mat-menu-item><a routerLink="/setting/updateData">Update user data <i class="fa-solid fa-user"></i></a></button>
+              <button class="justify-content-center" mat-menu-item><a routerLink="/allorders">My Orders <i class="fa-solid fa-truck"></i></a></button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>

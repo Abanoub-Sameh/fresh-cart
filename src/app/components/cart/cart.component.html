@@ -1,0 +1,56 @@
+<div *ngIf="!cartDetails?.products.length" class="w-100 py-5 my-5 d-flex justify-content-center align-items-center text-danger">
+    <div class="  fw-bolder fs-1  py-5 my-4 d-flex justify-content-center align-items-center text-danger">
+        <h2> cart is empty ! </h2>
+        <i class="fa-solid fa-cart-plus fa-shake mx-3"></i>
+    </div>
+</div>
+
+<div *ngIf="cartDetails?.products?.length" class="p-4 my-4 ">
+    <h2 class="text-center fw-bolder fa-3x">Shop Cart</h2>
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-4">
+        <h5>Number of Items : <span class="text-main h5 fw-bold">{{cartDetails?.products.length}}</span> </h5>        
+        <button (click)="deleteCart()" class="btn btn-outline-danger"> <i class="fa-solid fa-ban"></i> clear cart</button>
+    </div>
+    <div  *ngFor="let product of cartDetails?.products" class="row gy-4 shadow-sm rounded-2 my-3 bg-body">
+        <div class="col-md-2 mb-3">
+            <img class="img-fluid" [src]="product.product.imageCover" alt="product image Cover">
+        </div>
+        <div class="col-md-10 d-flex justify-content-between align-items-center">
+            <div>
+                <h3>{{product.product.title}}</h3>
+                <h5 class="my-3">Price : <span class="text-main">{{product.price+' EGY'}}</span> </h5>
+                <p (click)="removeItem(product.product.id)" class=" btn btn-outline-danger"><i class="fa-regular fa-trash-can"></i> Remove</p>
+            </div>
+            <div class="d-flex align-items-center justify-content-center">
+                <button (click)="updateItemCount(product.product.id,product.count+1);product.count = product.count+1 " class="btn btn-outline-success ">+</button>
+                <p class="m-0 px-2">{{product.count}}</p>
+                <button [disabled]="product.count === 1" (click)="updateItemCount(product.product.id,product.count-1);product.count = product.count-1 " class="btn btn-outline-danger">-</button>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <h4 class="px-4 border">Total Price : <span class="text-main h4 fw-bold">{{cartDetails?.totalCartPrice +' EGY'}}</span></h4>
+        <button onclick="this.disabled=true;" class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <a> Online payment <img class="visa" src="./assets/images/pngwing.com.png" alt="visa"></a>
+        </button>
+    </div>
+        <!-- pay part -->
+        <div class="collapse my-5" id="collapseExample">
+            <div class="w-50 mx-auto">
+                <form [formGroup]="shippingAddress" (ngSubmit)="handlepayment(shippingAddress , cartDetails?._id)">
+                    <label for="details">Details:</label>
+                    <input type="text" class="form-control mb-2" formControlName="details"  id="details">
+                    <label for="phone">Phone:</label>
+                    <input type="text" class="form-control mb-2" formControlName="phone"  id="phone">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control mb-2" formControlName="city"  id="city">
+                    <button class="btn bg-main text-warning fw-bold" type="submit">Pay <i class="fa-solid fa-credit-card"></i></button>
+                </form>
+            </div>
+        </div>
+
+</div>
+
+
+
+

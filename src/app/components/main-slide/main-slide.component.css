@@ -1,0 +1,10 @@
+.owl-theme .owl-nav [class*=owl-]{
+    color: #5dda14 !important;
+    font-size: 14px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: #24c70f !important;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+}

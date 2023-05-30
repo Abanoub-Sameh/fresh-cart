@@ -1,0 +1,20 @@
+<div class="row g-4">
+    <input [(ngModel)]="text" class="form-control my-2" placeholder="Product search..." type="text">
+    <div *ngFor="let product of products|search:text" class="col-sm-6 col-lg-4 col-xl-3">
+        <div class="product p-3 overflow-hidden shadow-sm rounded-3 bg-body">
+            <a [routerLink]="['/productdetails', product._id ]">
+                <div class="overflow-hidden">
+                    <img   class=" img-fluid" src={{product.imageCover}} alt="product image Cover">
+                </div>
+                <p class="fw-bold text-main m-0">{{product.category.name}}</p>
+                <h3 class="h5 fw-bolder">{{product.title.split(' ').splice(0,2).join(' ')}}</h3>
+                <div class="d-flex justify-content-between">
+                    <p class="fw-bold mt-3">{{product.price +' EGY'}}</p>
+                    <p class="fw-bold mt-3"> <i class="fa fa-star rating-color"></i>{{product.ratingsAverage}}</p>
+                </div>
+            </a>
+            <button *ngIf="isLogin()" (click)="addToCart(product?._id)"   class="btn bg-main text-white w-100 my-2"><i class="fa fa-plus"></i> Add To Cart </button>
+            <button *ngIf="!isLogin()" (click)="addToCart(product?._id)"   class="btn bg-danger text-white w-100 my-2">Login to add item to cart </button>
+        </div>
+    </div>
+</div>

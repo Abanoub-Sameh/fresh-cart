@@ -1,0 +1,15 @@
+<div class="py-5" id="categories">
+    <h2 class="fw-bolder mb-3">shop popular category : </h2>
+    <owl-carousel-o class="position-relative" [options]="customOptions" (dragging)="isDragging = $event.dragging">
+        <ng-container *ngFor="let category of categories">
+        <ng-template  carouselSlide >
+            <div class=" slider">
+                <a [stopLink]="isDragging" [owlRouterLink]="['/categoryDetails', category._id ]">
+                    <img class="rounded-4" height="250" [src]="category.image"  alt="category image">
+                    <h4 class=" text-center mt-3">{{category.name}}</h4>
+                </a>
+            </div>
+        </ng-template>
+        </ng-container>
+    </owl-carousel-o>
+</div>

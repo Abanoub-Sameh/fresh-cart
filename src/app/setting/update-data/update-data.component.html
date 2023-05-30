@@ -1,0 +1,38 @@
+<section class="w-75 mx-auto py-5">
+
+    <h2>Update user data :</h2>
+    <form [formGroup]="formUpdateUserData"  (ngSubmit)="updateUpdateUserData(formUpdateUserData)">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control mb-3" id="name" formControlName="name">
+        
+        <div *ngIf="formUpdateUserData.get('name')?.errors && formUpdateUserData.get('name')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formUpdateUserData.get('name')?.getError('minlength')" class="m-0">Please enter a text with a minimum of 3 characters .</p>
+            <p *ngIf="formUpdateUserData.get('name')?.getError('maxlength')" class="m-0">Please enter a text with a maximum of 20 characters.</p>
+            <p *ngIf="formUpdateUserData.get('name')?.getError('required')" class="m-0">This field is required</p>
+        </div>
+        
+        <label for="email">Email:</label>
+        <input type="email" class="form-control mb-3" id="email" formControlName="email">
+        <div *ngIf="formUpdateUserData.get('email')?.errors && formUpdateUserData.get('email')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formUpdateUserData.get('email')?.getError('email')" class="m-0">Email is invalid</p>
+            <p *ngIf="formUpdateUserData.get('email')?.getError('required')" class="m-0">Email is required</p>
+        </div>
+        
+
+        <label for="phone">phone:</label>
+        <input type="tel" class="form-control mb-3" id="phone" formControlName="phone">
+
+        <div *ngIf="formUpdateUserData.get('phone')?.errors && formUpdateUserData.get('phone')?.touched" class="alert alert-danger my-2">
+            <p *ngIf="formUpdateUserData.get('phone')?.getError('pattern')">please enter egyption valid number.</p>
+            <p *ngIf="formUpdateUserData.get('phone')?.getError('required')">phone is required.</p>
+        </div>
+
+        <div class="d-flex  flex-column flex-wrap align-content-center">
+            <button [disabled]="formUpdateUserData.invalid" type="submit" class="btn bg-main text-white d-block ms-auto">
+                <i *ngIf="isLoading" class="fa-solid fa-circle-notch fa-spin"></i>
+                <span *ngIf="!isLoading">Update user data </span>
+            </button>
+        </div>
+        <div *ngIf="errorMsg"  class="w-50 text-center mx-auto my-2 alert alert-danger">{{errorMsg}}</div>
+    </form>
+</section>

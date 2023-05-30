@@ -1,0 +1,22 @@
+<section class="row g-5 py-5 align-items-center">
+    <div class=" col-md-6 col-lg-4">
+        <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let image of protectedDetails?.images">
+            <ng-template  carouselSlide>
+                <img class="w-100" [src]="image" alt="product image Cover">
+            </ng-template>
+            </ng-container>
+        </owl-carousel-o>
+    </div>
+    <div class="col-md-6 col-lg-8">
+        <h2 class=" fw-bolder">{{protectedDetails?.title}}</h2>
+        <p class="my-4 lead text-muted">{{protectedDetails?.description}}</p>
+        <p class="h5 fw-bold text-main m-0">{{protectedDetails?.category.name}}</p>
+        <div class="d-flex justify-content-between">
+            <p class="fs-5 fw-bold mt-3">{{protectedDetails?.price +' EGP'}}</p>
+            <p class="fs-5 fw-bold mt-3"> <i class="fa fa-star rating-color"></i>{{protectedDetails?.ratingsAverage}}</p>
+        </div>
+        <button *ngIf="isLogin()" (click)="addToCart(protectedDetails._id)"   class="btn bg-main text-white w-100 my-2"><i class="fa fa-plus"></i> Add To Cart </button>
+        <button *ngIf="!isLogin()" (click)="addToCart(protectedDetails._id)"   class="btn bg-danger text-white w-100 my-2">Login to add item to cart </button>
+    </div>
+</section>

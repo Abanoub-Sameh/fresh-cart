@@ -1,0 +1,6 @@
+app-navbar{
+    z-index: 9;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
